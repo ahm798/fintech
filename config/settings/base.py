@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
 APPS_DIR = path.join(BASE_DIR, 'apps')
 
-local_env_path = path.join(BASE_DIR, '.envs', '.local.env')
+local_env_path = path.join(BASE_DIR, '.envs', '.env.local')
 
 if path.isfile(local_env_path):
     load_dotenv(local_env_path)
