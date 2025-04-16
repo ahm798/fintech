@@ -64,4 +64,6 @@ staticfiles/
 .idea
 .DS_Store
 .envs/
-!.envs/env.example
+
+#exclude file to be tracked
+!.envs/.env.example
