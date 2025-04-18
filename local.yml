@@ -50,7 +50,7 @@ services:
       -MP_SMTP_AUTH_ALLOW_INSECURE=1
 
 networks:
-  banker_local_nw:
+  banker_local_nw: 
     external: true
 
 volumes:
