@@ -1,4 +1,5 @@
 -r base.txt
 # Local requirements for development and testing
-watchfiles==0.22.0
+
+watchfiles
 black==24.8.0

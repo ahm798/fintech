@@ -7,7 +7,7 @@ ARG BUILD_ENVIROMENT=local
 
 RUN apt-get update&& apt-get install --no-install-recommends -y \
     libpq-dev \
-    build-essential \
+    build-essential 
 
 COPY ./requirements .
 RUN pip wheel --wheel-dir /usr/src/app/wheels -r ${BUILD_ENVIROMENT}.txt
@@ -16,9 +16,9 @@ RUN pip wheel --wheel-dir /usr/src/app/wheels -r ${BUILD_ENVIROMENT}.txt
 FROM python AS python-run-stage
 ARG BUILD_ENVIROMENT=local
 ARG APP_HOME=/app
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    BUILD_ENVIROMENT=${BUILD_ENVIROMENT} 
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    BUILD_ENV=${BUILD_ENVIROMENT} 
 
 WORKDIR ${APP_HOME}
 
@@ -29,8 +29,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN addgroup --system django && adduser --system --ingroup django django \
-    && mkdir -p /${APP_HOME}/staticfiles && chown -R django:django /${APP_HOME}/staticfiles \
-    chmod -R 775 /${APP_HOME}/staticfiles \
+    && mkdir -p ${APP_HOME}/staticfiles && chown -R django:django ${APP_HOME}/staticfiles \
+    && chmod 775 ${APP_HOME}/staticfiles 
 
 COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 

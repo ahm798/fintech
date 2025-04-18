@@ -13,7 +13,7 @@ services:
     depends_on:
       - postgres
       - mailpit
-    commmad: /start.sh
+    command: /start.sh
     networks:
       - banker_local_nw
   
@@ -44,10 +44,10 @@ services:
       - mailpit_mailpit_db:/data
     
     environment:
-      -MP_MAX_MESSAGES=1000
-      -MP_DATA_FILE=/data/mailpit.db
-      -MP_SMTP_AUTH_ACCEPT_ANY=1
-      -MP_SMTP_AUTH_ALLOW_INSECURE=1
+      - MP_MAX_MESSAGES=1000
+      - MP_DATA_FILE=/data/mailpit.db
+      - MP_SMTP_AUTH_ACCEPT_ANY=1
+      - MP_SMTP_AUTH_ALLOW_INSECURE=1
 
 networks:
   banker_local_nw: 
