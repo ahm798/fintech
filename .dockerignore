@@ -1,0 +1,10 @@
+.git/
+*.pyc
+__pycache__/
+*.pyo
+.venv/
+venv/
+.envs/*
+staticfiles
+.vscode/
+*.db
