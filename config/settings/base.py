@@ -79,7 +79,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -102,7 +101,6 @@ PASSWORD_HASHERS = [
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -119,10 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -149,7 +144,7 @@ LOGGING_CONFIG = None
 LOGURU_LOGGING = {
     "handlers": [
         {
-            "sink": BASE_DIR / "logs/debug.log",
+            "sink": path.join(BASE_DIR, "logs/debug.log"),
             "level": "DEBUG",
             "rotation": "10 MB",
             "retention": "30 days",
@@ -157,7 +152,7 @@ LOGURU_LOGGING = {
             "filter": lambda record: record["level"].no <= logger.level("WARNING").no,
             "format": "<green>{time:YYYY-MM-DD at HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
         },{
-            "sink": BASE_DIR / "logs/error.log",
+            "sink": path.join(BASE_DIR, "logs/debug.log"),
             "level": "ERROR",
             "rotation": "10 MB",
             "retention": "30 days",
