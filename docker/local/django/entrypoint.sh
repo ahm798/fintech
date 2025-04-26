@@ -26,10 +26,11 @@ while True:
         if time.time() - start > suggest_unrecoverable_After:
             sys.stderr.write("Database not ready after 30 seconds, exiting...\n")
             sys.exit(1)
-            time.sleep(5)
+        time.sleep(5)
 END
 
 echo >&2 "Database is ready, starting Django server..."
+
 
 exec "$@"
 

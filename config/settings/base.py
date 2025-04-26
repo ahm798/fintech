@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 from os import getenv, path
@@ -12,8 +13,6 @@ local_env_path = path.join(BASE_DIR, '.envs', '.env.local')
 
 if path.isfile(local_env_path):
     load_dotenv(local_env_path)
-
-
 
 
 # Application definition
@@ -134,6 +133,7 @@ SITE_ID=1
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -144,7 +144,7 @@ LOGGING_CONFIG = None
 LOGURU_LOGGING = {
     "handlers": [
         {
-            "sink": path.join(BASE_DIR, "logs/debug.log"),
+            "sink": BASE_DIR / "logs/debug.log",
             "level": "DEBUG",
             "rotation": "10 MB",
             "retention": "30 days",
@@ -152,7 +152,7 @@ LOGURU_LOGGING = {
             "filter": lambda record: record["level"].no <= logger.level("WARNING").no,
             "format": "<green>{time:YYYY-MM-DD at HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
         },{
-            "sink": path.join(BASE_DIR, "logs/debug.log"),
+            "sink": BASE_DIR / "logs/debug.log",
             "level": "ERROR",
             "rotation": "10 MB",
             "retention": "30 days",
