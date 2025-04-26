@@ -19,7 +19,7 @@ FROM python AS python-run-stage
 
 ARG BUILD_ENVIRONMENT=local
 
-ARG APP_HOME=/app
+ARG APP_HOME=/usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -43,17 +43,18 @@ COPY --from=python-build-stage /usr/src/app/wheels /wheels/
 
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
     && rm -rf /wheels/
+
 COPY --chown=django:django ./docker/local/django/entrypoint.sh /entrypoint.sh
 COPY --chown=django:django ./docker/local/django/start.sh /start.sh
 
+RUN chmod +x /entrypoint.sh /start.sh
 
-RUN sed -i 's/\r$//g' /entrypoint.sh \
-    && sed -i 's/\r$//g' /start.sh \
-    && chmod +x /entrypoint.sh \
-    && chmod +x /start.sh
 
 COPY --chown=django:django . ${APP_HOME}
 
 USER django
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+
